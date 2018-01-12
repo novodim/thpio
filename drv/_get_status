@@ -1,0 +1,9 @@
+#!/bin/bash
+
+dev_name=$(find  /sys/module/thpo/drivers/usb:thpo/ -type l | grep -v "usb:thpo/module")
+cat ${dev_name}/status
+#sleep 1
+#echo 1 > ${dev_name}/status
+#sleep 1
+#cat ${dev_name}/status
+
