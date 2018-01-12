@@ -1,4 +1,4 @@
-# thpio
+### thpio
 
 interface linux kernel - to bunch of sensor connected to arduino (1wire, dht11, adc, gpio)
 
@@ -19,65 +19,65 @@ prepare software:
 
 tested with ubuntu 14,16,17, rasbian based on wheezy, stretch
 
-# get git
+### get git
 apt-get install git
 
-# setup avr toolchain
+### setup avr toolchain
 apt-get install avrdude gcc-avr avr-libc
 
-# setup kernel module development toolchain
+### setup kernel module development toolchain
 apt-get install gcc make
 
-# for raspbian (stretch):
+### for raspbian (stretch):
 apt-get install raspberrypi-kernel-headers
 
-# for ubuntu/debian:
+### for ubuntu/debian:
 apt-get install linux-libc-dev
 
-# get thpio sources
+### get thpio sources
 git clone https://github.com/novodim/thpio/
 
-# start with preparing firmware
+### start with preparing firmware
 cd thpio/avr
 
-# hack hal.h accordingly your hardware, use arduino schematics to convert arduino ports to normal avr mc ports
+### hack hal.h accordingly your hardware, use arduino schematics to convert arduino ports to normal avr mc ports
 vi hal.h
 
-# build firmware
+### build firmware
 make
 
-# flash firmare to arduino with its bootloader, make sure arduion is on /dev/ttyUSB0, hack Makefile if not
+### flash firmare to arduino with its bootloader, make sure arduion is on /dev/ttyUSB0, hack Makefile if not
 make flash
 
-# usually fuses do not need to be programmed if your arduion has working bootloader and clocked by external crystal at maximum frequency (16Mhz)
-# get to building linux kernel module
+### usually fuses do not need to be programmed if your arduion has working bootloader and clocked by external crystal at maximum frequency (16Mhz)
+### get to building linux kernel module
 cd ../drv
 
-# build module, if ok then thpo.ko will appear in drv directory (make sure proper version of kernel-headers is installed)
+### build module, if ok then thpo.ko will appear in drv directory (make sure proper version of kernel-headers is installed)
 make
 
-# unload uart usb module for your arduino (in my case ch341 module)
+### unload uart usb module for your arduino (in my case ch341 module)
 rmmod ch341
 
-# check that usb uart module is absent
+### check that usb uart module is absent
 lsmod | grep ch341
 
-# check last lines of dmesg, should be somethins like:
-# usbserial: USB Serial deregistering driver ch341-uart
-# ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0
-# usbcore: deregistering interface driver ch341
-# ch341 1-1.2:1.0: device disconnected
+### check last lines of dmesg, should be somethins like:
+### usbserial: USB Serial deregistering driver ch341-uart
+### ch341-uart ttyUSB0: ch341-uart converter now disconnected from ttyUSB0
+### usbcore: deregistering interface driver ch341
+### ch341 1-1.2:1.0: device disconnected
 dmesg | tail -n 20
 
-# now load freshly compiled thpo.ko
+### now load freshly compiled thpo.ko
 insmod thpo.ko
 
-# check output of kernel, should be something like:
-# thpo_probe called sizeof status is: 10
-# usbcore: registered new interface driver thpo
+### check output of kernel, should be something like:
+### thpo_probe called sizeof status is: 10
+### usbcore: registered new interface driver thpo
 dmesg | tail -n 20
 
-# get info last status of sensors from arduino:
+### get info last status of sensors from arduino:
 ./_get_status
 
 ### output should be like that:
@@ -104,7 +104,8 @@ mpx-0: 819
 in: 0
 out: 0
 ```
-# in order to reflash arduino do the following:
+### in order to reflash arduino do the following:
+```
 rmmod thpo
 cd ../avr
 modprobe ch341
@@ -113,4 +114,4 @@ rmmod ch341
 cd ../drv
 insmod thpo.ko
 ./_get_status
-
+```
