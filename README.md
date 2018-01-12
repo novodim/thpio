@@ -28,10 +28,10 @@ apt-get install avrdude gcc-avr avr-libc
 # setup kernel module development toolchain
 apt-get install gcc make
 
-#for raspbian (stretch):
+# for raspbian (stretch):
 apt-get install raspberrypi-kernel-headers
 
-#for ubuntu/debian:
+# for ubuntu/debian:
 apt-get install linux-libc-dev
 
 # get thpio sources
