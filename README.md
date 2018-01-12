@@ -80,7 +80,8 @@ dmesg | tail -n 20
 # get info last status of sensors from arduino:
 ./_get_status
 
-# output should be like that:
+### output should be like that:
+```
 status_size: 58
 ds_info_noBus: 2
 ds_info_busSize: 2
@@ -102,7 +103,7 @@ dht-1-hum: 35
 mpx-0: 819
 in: 0
 out: 0
-
+```
 # in order to reflash arduino do the following:
 rmmod thpo
 cd ../avr
