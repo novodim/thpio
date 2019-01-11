@@ -110,7 +110,7 @@ static ssize_t show_status(struct device *dev, struct device_attribute *attr, ch
 	struct thpo_usb *led = usb_get_intfdata(intf); 
     int retval;
 	int actual_length;
-	char cmd[2];
+	char * cmd;
     status_t * buffer;
     status_t header_status;
 	char * full_status;
@@ -136,6 +136,11 @@ static ssize_t show_status(struct device *dev, struct device_attribute *attr, ch
 
     printk("configuring uart\n");
     ch341_set_baudrate(led->udev,9600);
+        cmd= kmalloc(2, GFP_KERNEL);
+        if (!cmd) {
+                dev_err(&led->udev->dev, "out of memory\n");
+                return -1;
+        }
 
 	cmd[0]='x';
 	retval = 0;
