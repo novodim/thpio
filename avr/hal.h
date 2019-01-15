@@ -2,7 +2,7 @@
 #define hal_h
 
 // every this period refresh sensors values for each bus in turn
-#define BUS_REFRESH_MS 1000
+#define BUS_REFRESH_MS 60000
 
 // number of ds sensors used
 #define DS_NUM_BUSES 0
