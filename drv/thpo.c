@@ -85,24 +85,29 @@ static int ch341_set_baudrate(struct usb_device *dev,
 
 int16_t get_int (uint16_t raw)
 {
-	int16_t int_part=(raw>>4)-4096;
-//    	printk("raw: %d\n",raw);
-	if (raw&0x8000) {
-	if (raw&0x000f)return -int_part-1; else return -int_part;
-	} else return raw>>4;
+        int16_t int_part=(raw>>4)-4096;
+        if (raw&0x8000) {
+        if (raw&0x000f)return -int_part-1; else return -int_part;
+        } else return raw>>4;
 }
 
 int16_t get_frac (uint16_t raw)
 {
-	int16_t frac_part=(raw&0x000e)>>1;
-	if (raw&0x8000) {
-	if (frac_part==0)return 0; else return (8-frac_part)*125/100;
-	} else return frac_part*125/100;
+        int16_t frac_part=(raw&0x000f);
+        //               0                   1
+        //               0 1 2 3 4 5 6 7 8 9 0  1  2  3  4  5  6
+        int16_t out[17]={0,1,1,2,3,3,4,4,5,6,6, 7, 8, 8, 9, 9, 0};
+        if (raw&0x8000) {
+                        return out[16-frac_part];
+                } else {
+                        return out[frac_part];
+                        }
 }
 
 char get_sign (uint16_t raw){
-	if (raw&0x8000)return '-'; else
-	return '+';
+        printk("raw_gs: %x\n",raw);
+        if (raw&0x8000)return '-'; else
+        return '+';
 }
 
 static ssize_t show_status(struct device *dev, struct device_attribute *attr, char *buf) {
