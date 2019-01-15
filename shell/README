@@ -1,0 +1,7 @@
+starting point of getting quickly graphical representation of values grabbed from arduino's sensors making use of rrdtool.
+
+
+1. put into file shell/ids some unique ids of your sensors (listed by drv/_get_status)
+2. run shell/_create_rra.sh to initialize rrd databases by rrdtool
+3. setup a cronjob to update rrd files periodically, use shell/cronjob as a reference
+4. shell/index.php can render html for getting frontend of daily,weekly etc charts quickly if put into php-enabled webserver

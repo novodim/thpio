@@ -1,0 +1,2 @@
+* * * * * root /var/www/thpo/_update_rrd.sh > /dev/null 2>/dev/null
+
