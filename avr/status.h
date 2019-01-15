@@ -59,12 +59,8 @@ typedef struct status {
 #if ( MPX_NUM_BUSES > 1 )
         uint16_t mpx_b2;
 #endif
-//#if ( IN_NUM_BUSES > 0 )
         uint8_t in;
-//#endif
-//#if ( OUT_NUM_BUSES > 0 )
         uint8_t out;
-//#endif
 } status_t;
 
 void InitStatus(void);
