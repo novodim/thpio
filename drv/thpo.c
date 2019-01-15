@@ -303,7 +303,7 @@ static int thpo_probe(struct usb_interface *interface, const struct usb_device_i
 	struct thpo_usb *dev = NULL;
 	int retval = -ENOMEM;
     struct timeval tv;
-	printk("thpo_probe called sizeof status is: %d\n",sizeof(status_t));
+	printk("thpo_probe called sizeof status is: %d\n",(int)sizeof(status_t));
 
 	dev = kzalloc(sizeof(struct thpo_usb), GFP_KERNEL);
 	if (dev == NULL) {
