@@ -2,14 +2,14 @@
 #define hal_h
 
 // every this period refresh sensors values for each bus in turn
-#define BUS_REFRESH_MS 60000
+#define BUS_REFRESH_MS 10000
 
 // number of ds sensors used
-#define DS_NUM_BUSES 0
+#define DS_NUM_BUSES 1
 #if ( DS_NUM_BUSES > 3 )
 #error DS_NUM_BUSES cannot be greater than 3
 #endif
-#define DS_BUS_MAX_SENS 2
+#define DS_BUS_MAX_SENS 1
 
 #define DS_B1_IN   	PIND
 #define DS_B1_PIN  	PD2
@@ -45,7 +45,7 @@
 #define MPX_VREF_SOURCE_VINT 0
 
 //number of mpx sensors used
-#define MPX_NUM_BUSES 2
+#define MPX_NUM_BUSES 0
 #define MPX_B1_ADC_PORT 0
 #define MPX_B2_ADC_PORT 1
 
@@ -76,13 +76,13 @@
 #define IN_B4_DDR   DDRD
 
 //number of digital out pins used
-#define OUT_NUM_BUSES 1
+#define OUT_NUM_BUSES 0
 #if ( OUT_NUM_BUSES > 8 )
 #error OUT_NUM_BUSES cannot be greater than 8
 #endif
 
 #define OUT_B1_IN    PIND
-#define OUT_B1_PIN   PD2
+#define OUT_B1_PIN   PD7
 #define OUT_B1_OUT   PORTD
 #define OUT_B1_DDR   DDRD
 

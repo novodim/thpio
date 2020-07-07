@@ -32,7 +32,7 @@ apt-get install gcc make
 apt-get install raspberrypi-kernel-headers
 
 ### for ubuntu/debian:
-apt-get install linux-libc-dev
+apt-get install linux-libc-dev linux-headers-4.19.0-9-amd64
 
 ### get thpio sources
 git clone https://github.com/novodim/thpio/
@@ -112,3 +112,18 @@ cd ../drv
 insmod thpo.ko
 ./_get_status
 ```
+
+
+### copy thpo.ko to /lib/modules:
+cp thpo.ko  /lib/modules/4.19.0-9-amd64/kernel/drivers/usb/serial/
+
+### run depmod
+depmod -ae
+
+### enable autoload of thpo module at boot time
+echo thpo >> /etc/modules
+
+### do not load ch341 and usbserial modules at boot time:
+echo blacklist ch341 >> /etc/modprobe.d/blacklist.conf
+echo blacklist usbserial >> /etc/modprobe.d/blacklist.conf
+
